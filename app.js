@@ -1,6 +1,6 @@
 const addForm = document.querySelector('.add');
 const list = document.querySelector('.todos');
-const search = document.querySelector('.search input');
+const search = document.querySelector('.search input'); // search is the class name and input is the child element of it
 
 const generateTemplate = (todo) => {
   const html = `
@@ -18,7 +18,7 @@ addForm.addEventListener('submit', (e) => {
 
   if (todo.length) {
     generateTemplate(todo);
-    addForm.reset();
+    addForm.reset(); // reset all the input fields inside that form
   }
 });
 
@@ -29,4 +29,18 @@ list.addEventListener('click', (e) => {
   }
 });
 
+const filterTodos = (term) => {
+  Array.from(list.children)
+    .filter((todo) => !todo.textContent.toLowerCase().includes(term))
+    .forEach((todo) => todo.classList.add('filtered'));
+
+  Array.from(list.children)
+    .filter((todo) => todo.textContent.toLowerCase().includes(term))
+    .forEach((todo) => todo.classList.remove('filtered'));
+};
+
 // keyup event
+search.addEventListener('keyup', () => {
+  const term = search.value.trim().toLowerCase();
+  filterTodos(term);
+});

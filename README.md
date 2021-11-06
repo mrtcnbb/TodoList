@@ -1,3 +1,3 @@
 # TodoList
 
-This project is for your daily Todos.
+This project is for listing your daily Todos.
